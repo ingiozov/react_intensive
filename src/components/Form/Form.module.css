@@ -32,6 +32,11 @@ textarea {
   resize: none;
 }
 
+input::placeholder,
+textarea::placeholder {
+  color: #626262;
+}
+
 form > div {
   position: relative;
 }

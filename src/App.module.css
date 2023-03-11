@@ -102,7 +102,7 @@ button::after {
   height: 55px;
   right: 0;
   top: 50%;
-  transform: translateY(-62%);
+  transform: translateY(-64%);
   transition: all 0.3s ease-in-out;
 }
 

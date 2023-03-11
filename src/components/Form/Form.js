@@ -21,11 +21,10 @@ export default class Form extends Component {
   handleSubmit(e) {
     e.preventDefault()
     if (formValidation(this.state)) {
-      console.log(Array.from(Object.values(this.state)).slice(0, -1).join(`\n`))
-      const separator = '<br>'
-      this.showModal(
-        Array.from(Object.values(this.state)).slice(0, -1).join('\n')
-      )
+      const data = Array.from(Object.values(this.state)).slice(0, -1).join(`\n`)
+      console.log(data)
+
+      this.showModal(data)
     } else {
       console.log('все поля должны быть корректно заполнены')
       this.showModal('все поля должны быть корректно заполнены')
@@ -59,7 +58,6 @@ export default class Form extends Component {
               />
             )
           }
-
           return (
             <WithBadgeInput
               key={item.label}
@@ -81,6 +79,12 @@ export default class Form extends Component {
         </div>
 
         <Modal show={this.state.showModal} />
+
+        <div
+          ref={(el) => {
+            this.el = el
+          }}
+        />
       </form>
     )
   }
