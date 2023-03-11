@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600;700;800;900&display=swap');
+
+body {
+  font-family: 'Montserrat Alternates', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* height: 100vh; */
+  width: 100vw;
+
+  display: grid;
+  place-items: center;
+
+  background: #2c2c2c;
+
+  background: rgb(35, 37, 38);
+  /* background: linear-gradient(
+    90deg,
+    rgba(35, 37, 38, 1) 20%,
+    rgba(65, 67, 69, 1) 50%,
+    rgba(35, 37, 38, 1) 80%
+  ); */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+.App {
+  max-width: 405px;
+  min-width: 100vw;
+  margin: 0 auto;
+  box-shadow: 0px 21px 52px rgba(0, 0, 0, 0.2);
+  padding: 70px 30px 40px;
+  background: #1d1d1d;
+  /* opacity: 0.9; */
+}
+
+h1 {
+  font-weight: 800;
+  font-size: 37px;
+  line-height: 46px;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin-bottom: 45px;
+}
+
+p {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: -0.05em;
+  margin-bottom: 7px;
+  margin-left: 30px;
+  color: #626262;
+}
+
+button {
+  position: relative;
+  width: 100%;
+
+  border: none;
+  outline: none;
+  background: none;
+  color: white;
+  text-align: start;
+
+  font-family: 'Montserrat Alternates';
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 110px;
+  letter-spacing: -0.03em;
+
+  cursor: pointer;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  width: 55px;
+  height: 55px;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    47.35% 47.35% at 50% 50%,
+    #ffab95 0%,
+    #df3908 100%
+  );
+  box-shadow: 0px 10px 31px rgba(255, 94, 52, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+button::after {
+  content: url('./icons/arrow-right.png');
+  position: absolute;
+  width: 55px;
+  height: 55px;
+  right: 0;
+  top: 50%;
+  transform: translateY(-62%);
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover::after {
+  /* top: calc(50% - 5px); */
+}
+
+button:hover::before {
+  /* top: calc(50% - 5px); */
+  box-shadow: 0px 5px 11px rgba(255, 94, 52, 0.3);
+}
+
+@media screen and (min-width: 600px) {
+  .App {
+    border-radius: 58px;
+    min-width: 800px;
+  }
+}
