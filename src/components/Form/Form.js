@@ -25,15 +25,15 @@ export default class Form extends Component {
       console.log(data)
       this.showModal(data)
     } else {
-      console.log('все поля должны быть корректно заполнены')
-      this.showModal('все поля должны быть корректно заполнены')
+      console.log('Все поля должны быть корректно заполнены')
+      this.showModal('Все поля должны быть корректно заполнены')
     }
   }
 
   handleCancel() {
     this.setState(initialState)
-    this.showModal('форма очищена')
-    console.log('форма очищена')
+    this.showModal('Форма очищена')
+    console.log('Форма очищена')
   }
 
   showModal(text) {
@@ -81,67 +81,7 @@ export default class Form extends Component {
             Отмена
           </Button>
         </div>
-
-        {/* <div
-          ref={(el) => {
-            this.el = el
-          }}
-        /> */}
       </form>
     )
   }
 }
-
-// Необходимо  создать верстку для формы-анкеты используя переиспользуемые stateless комопненты React. Пишем только на классовых компонентах.
-// 	На странице должен быть заголовок «Создание анкеты». А ниже такие поля как «Имя», «Фамилия»,  «Дата рождения»,  «Телефон», «Сайт»,  «О себе», «Стек технологий», «Описание последнего проекта».  В конце должен быть блок с кнопками «Отмена» и «Сохранить».
-// 	Над каждым полем должна быть подпись (label). Помимо подписи должен быть еще соответствующий placeholder.
-// 	Поля «О себе», «Стек технологий» и «Описание последнего проекта» должны быть сделаны как многострочные поля ввода с фиксированным количеством строк для ввода (7 строк).
-// 	Страничка должна быть презентабельной – дизайн на ваш вкус. Используем только React и CSS модули.  Другие вспомогательные библиотеки использовать нельзя.
-
-// return (
-//   <form onSubmit={this.handleSubmit}>
-//     {data.map((item) =>
-//       item.type === 'text' ? (
-//         <div key={item.label}>
-//           <WithBadgeInput
-//             label={item.label}
-//             value={this.state[item.stateName]}
-//             onChange={(e) =>
-//               this.setState({ [item.stateName]: e.target.value })
-//             }
-//           />
-//         </div>
-//       ) : item.type === 'date' ? (
-//         <div key={item.label}>
-//           <WithBadgeDate
-//             label={item.label}
-//             value={this.state[item.stateName]}
-//             onChange={(e) =>
-//               this.setState({ [item.stateName]: e.target.value })
-//             }
-//           />
-//         </div>
-//       ) : item.type === 'tel' ? (
-//         <div key={item.label}>
-//           <WithBadgeTel
-//             label={item.label}
-//             value={this.state[item.stateName]}
-//             onChange={(e) =>
-//               this.setState({ [item.stateName]: e.target.value })
-//             }
-//           />
-//         </div>
-//       ) : (
-//         <div key={item.label}>
-//           <WithBadgeTextArea
-//             label={item.label}
-//             value={this.state[item.stateName]}
-//             onChange={(e) =>
-//               this.setState({ [item.stateName]: e.target.value })
-//             }
-//           />
-//         </div>
-//       )
-//     )}
-//   </form>
-// )
