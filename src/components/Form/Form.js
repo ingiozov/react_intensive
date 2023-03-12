@@ -23,7 +23,6 @@ export default class Form extends Component {
     if (formValidation(this.state)) {
       const data = Array.from(Object.values(this.state)).slice(0, -1).join(`\n`)
       console.log(data)
-
       this.showModal(data)
     } else {
       console.log('все поля должны быть корректно заполнены')
@@ -34,6 +33,7 @@ export default class Form extends Component {
   handleCancel() {
     this.setState(initialState)
     this.showModal('форма очищена')
+    console.log('форма очищена')
   }
 
   showModal(text) {
@@ -71,6 +71,10 @@ export default class Form extends Component {
           )
         })}
 
+        <div>
+          <Modal show={this.state.showModal} />
+        </div>
+
         <div className={styles.cta}>
           <Button type="submit">Сохранить</Button>
           <Button type="button" onClick={this.handleCancel}>
@@ -78,13 +82,11 @@ export default class Form extends Component {
           </Button>
         </div>
 
-        <Modal show={this.state.showModal} />
-
-        <div
+        {/* <div
           ref={(el) => {
             this.el = el
           }}
-        />
+        /> */}
       </form>
     )
   }

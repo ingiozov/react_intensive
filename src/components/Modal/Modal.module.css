@@ -1,10 +1,14 @@
 .modal {
-  padding: 40px 0 0;
-  overflow: hidden;
+  padding: 18px 15px;
+  border: 1px solid #262626;
+  border-radius: 10px;
 }
 
 .modal p {
+  max-width: 260px;
   white-space: pre-wrap;
+  margin-left: 0;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 600px) {
