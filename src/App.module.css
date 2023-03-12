@@ -82,7 +82,7 @@ button::before {
   position: absolute;
   width: 55px;
   height: 55px;
-  right: 15px;
+  right: 0px;
   top: 50%;
   transform: translateY(-50%);
   border-radius: 50%;
@@ -100,7 +100,7 @@ button::after {
   position: absolute;
   width: 55px;
   height: 55px;
-  right: 15px;
+  right: 0px;
   top: 50%;
   transform: translateY(-64%);
   transition: all 0.3s ease-in-out;

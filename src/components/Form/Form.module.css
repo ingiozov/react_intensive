@@ -39,7 +39,6 @@ textarea::placeholder {
 
 form > div {
   position: relative;
-  overflow: hidden;
 }
 
 svg {
@@ -54,6 +53,12 @@ svg {
 ::-webkit-calendar-picker-indicator {
   font-size: 10px;
   display: none;
+}
+
+.cta {
+  border: 1px solid #262626;
+  border-radius: 10px;
+  padding: 0 15px;
 }
 
 @media screen and (min-width: 600px) {
