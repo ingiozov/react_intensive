@@ -32,18 +32,6 @@ export const withIcon = (Element) => (props) => {
 }
 
 export const formValidation = (stateObj) => {
-  // check if has empty fields
-  // const hasEmtyFields = Object.values(stateObj).some((value) => {
-  //   if (!value) {
-  //     return true
-  //   }
-  //   return false
-  // })
-  // if (hasEmtyFields) {
-  //   console.log('emty fields')
-  //   return false
-  // }
-
   function hasEmptyFields(obj) {
     for (let key in obj) {
       if (
