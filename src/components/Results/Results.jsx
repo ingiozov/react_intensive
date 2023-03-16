@@ -9,7 +9,7 @@ export default class Results extends Component {
       <>
         <h1>{`${data[0][1]} ${data[1][1]}`}</h1>
         {data.map((item) => (
-          <Result title={item[0].trim()} text={item[1].trim()} />
+          <Result title={item[0]} text={item[1].trim()} />
         ))}
         <Button type="button" onClick={this.props.onBack}>
           Назад
