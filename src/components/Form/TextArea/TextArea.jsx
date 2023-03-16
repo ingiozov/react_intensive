@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 export default class TextArea extends Component {
   render() {
-    const { label, value, onChange } = this.props
+    const { label, value, onChange, charCount, emptyMessage } = this.props
 
     return (
       <label>
@@ -14,7 +14,16 @@ export default class TextArea extends Component {
           value={value}
           onChange={onChange}
           placeholder={label}
+          maxLength={'600'}
         />
+        <aside>
+          {charCount > 599
+            ? 'Превышен лимит символов в поле'
+            : charCount > 0
+            ? `Осталось ${600 - charCount}/600 символов`
+            : ''}
+        </aside>
+        <h6>{emptyMessage}</h6>
       </label>
     )
   }

@@ -3,41 +3,55 @@ export const data = [
     type: 'text',
     label: 'Имя',
     stateName: 'name',
+    errorMessage: 'Имя должно начинаться с заглавной буквы',
+    required: true,
+    pattern: '^[A-Z-А-ЯЁ][a-z-а-яё]*(?: [A-Z][a-z]*)*$',
   },
   {
     type: 'text',
     label: 'Фамилия',
     stateName: 'lastName',
+    errorMessage: 'Фамилия должна начинаться с заглавной буквы',
+    required: true,
+    pattern: '^[A-Z-А-ЯЁ][a-z-а-яё]*(?: [A-Z][a-z]*)*$',
   },
   {
     type: 'date',
     label: 'Дата рождения',
     stateName: 'birthDate',
+    required: true,
   },
   {
     type: 'tel',
     label: 'Телефон',
     stateName: 'telNumber',
+    errorMessage: 'Номер в формате 7-7777-77-77',
+    required: true,
   },
   {
     type: 'url',
     label: 'Сайт',
     stateName: 'website',
+    errorMessage: 'всегда должен начинаться с https:// ',
+    required: true,
   },
   {
     type: 'textarea',
     label: 'О себе',
     stateName: 'about',
+    required: true,
   },
   {
     type: 'textarea',
     label: 'Стек технологий',
     stateName: 'stack',
+    required: true,
   },
   {
     type: 'textarea',
     label: 'Описание последнего проекта',
     stateName: 'lastProject',
+    required: true,
   },
 ]
 
@@ -51,4 +65,7 @@ export const initialState = {
   stack: '',
   lastProject: '',
   showModal: false,
+  unFocused: {},
+  charCount: {},
+  errorState: {},
 }

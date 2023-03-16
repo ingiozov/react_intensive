@@ -34,6 +34,18 @@ h1 {
   margin-bottom: 45px;
 }
 
+h2 {
+  color: #626262;
+  font-size: 20px;
+}
+
+h6 {
+  margin-left: 15px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ff4a265d;
+}
+
 p {
   font-size: 14px;
   font-weight: 700;
@@ -41,7 +53,23 @@ p {
   letter-spacing: -0.05em;
   margin-bottom: 7px;
   margin-left: 30px;
-  color: #626262;
+  color: #62626268;
+}
+
+span {
+  color: #ff4a265d;
+  /* opacity: 0.2; */
+  font-size: 14px;
+  font-weight: 600;
+  display: none;
+}
+
+input:invalid[focused='true'] {
+  border: 1px solid #ff4a263d;
+}
+
+input:invalid[focused='true'] ~ span {
+  display: block;
 }
 
 button {

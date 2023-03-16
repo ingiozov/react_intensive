@@ -30,6 +30,7 @@ textarea {
   outline: none;
   background-color: #262626;
   resize: none;
+  margin-bottom: 10px;
 }
 
 input::placeholder,

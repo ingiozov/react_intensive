@@ -4,7 +4,12 @@ import Input from './Input/Input'
 import TextArea from './TextArea/TextArea'
 import Button from '../Button/Button'
 import Modal from '../Modal/Modal'
-import { withIcon, formValidation } from '../../utils/functions'
+import {
+  withIcon,
+  // formValidation,
+  normalizePhoneNumber,
+  normalizeName,
+} from '../../utils/functions'
 import styles from './Form.module.css'
 
 const WithBadgeInput = withIcon(Input)
@@ -20,14 +25,35 @@ export default class Form extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    if (formValidation(this.state)) {
-      const data = Array.from(Object.values(this.state)).slice(0, -1).join(`\n`)
-      console.log(data)
-      this.showModal(data)
-    } else {
+
+    const emptyValues = Object.entries(this.state)
+      .slice(0, 8)
+      .filter((item) => item[1] === '')
+    const inputValues = Object.entries(this.state)
+      .slice(0, 8)
+      .filter((item) => item[1] !== '')
+
+    // handling empty fields
+    if (emptyValues.length > 0) {
+      const emptyFieldsState = {}
+      emptyValues.forEach((item) => {
+        emptyFieldsState[item[0]] = true
+      })
+      this.setState({
+        errorState: emptyFieldsState,
+      })
       console.log('Все поля должны быть корректно заполнены')
       this.showModal('Все поля должны быть корректно заполнены')
+      return
     }
+
+    // submit
+    // console.log(
+    //   Object.entries(this.state)
+    //     .slice(0, 8)
+    //     .map((item) => item[1])
+    // )
+    this.props.onFormSubmit(Object.entries(this.state).slice(0, 8))
   }
 
   handleCancel() {
@@ -43,45 +69,89 @@ export default class Form extends Component {
   }
 
   render() {
+    // console.log(this.state)
     return (
-      <form onSubmit={this.handleSubmit}>
-        {data.map((item) => {
-          if (item.type === 'textarea') {
+      <>
+        <h1>
+          Создание <br /> анкеты
+        </h1>
+        <form onSubmit={this.handleSubmit} noValidate>
+          {data.map((item) => {
+            if (item.type === 'textarea') {
+              return (
+                <WithBadgeTextArea
+                  key={item.label}
+                  label={item.label}
+                  value={this.state[item.stateName]}
+                  onChange={(e) => {
+                    this.setState({ [item.stateName]: e.target.value })
+                    this.setState({
+                      charCount: { [item.stateName]: e.target.value.length },
+                    })
+                    this.setState({
+                      errorState: { [item.stateName]: false },
+                    })
+                  }}
+                  charCount={this.state.charCount[item.stateName]}
+                  emptyMessage={
+                    this.state.errorState[item.stateName]
+                      ? 'поле должно быть заполнено'
+                      : ''
+                  }
+                />
+              )
+            }
             return (
-              <WithBadgeTextArea
+              <WithBadgeInput
+                {...item}
+                emptyMessage={
+                  this.state.errorState[item.stateName]
+                    ? 'поле должно быть заполнено'
+                    : ''
+                }
                 key={item.label}
+                type={item.type}
                 label={item.label}
                 value={this.state[item.stateName]}
-                onChange={(e) =>
-                  this.setState({ [item.stateName]: e.target.value })
+                onChange={(e) => {
+                  this.setState({
+                    [item.stateName]:
+                      e.target.type === 'tel'
+                        ? normalizePhoneNumber(e.target.value, e)
+                        : e.target.type === 'text'
+                        ? normalizeName(e.target.value)
+                        : e.target.value.trim(),
+                  })
+                  this.setState({
+                    errorState: { [item.stateName]: false },
+                  })
+                }}
+                onUnFocused={() => {
+                  if (this.state[item.stateName]) {
+                    this.setState({ unFocused: { [item.stateName]: true } })
+                  }
+                }}
+                unFocused={
+                  this.state.unFocused[item.stateName]
+                    ? this.state.unFocused[item.stateName]
+                    : false
                 }
               />
             )
-          }
-          return (
-            <WithBadgeInput
-              key={item.label}
-              type={item.type}
-              label={item.label}
-              value={this.state[item.stateName]}
-              onChange={(e) =>
-                this.setState({ [item.stateName]: e.target.value })
-              }
-            />
-          )
-        })}
+          })}
 
-        <div>
-          <Modal show={this.state.showModal} />
-        </div>
+          <div>
+            <Modal show={this.state.showModal} />
+          </div>
 
-        <div className={styles.cta}>
-          <Button type="submit">Сохранить</Button>
-          <Button type="button" onClick={this.handleCancel}>
-            Отмена
-          </Button>
-        </div>
-      </form>
+          <div className={styles.cta}>
+            <Button type="submit">Сохранить</Button>
+            <Button type="button" onClick={this.handleCancel}>
+              Отмена
+            </Button>
+          </div>
+        </form>
+      </>
     )
   }
 }
