@@ -7,51 +7,36 @@ import { ReactComponent as StackLogo } from '../icons/stack-overflow.svg'
 import { ReactComponent as LastLogo } from '../icons/laptop-file-solid.svg'
 
 export const withIcon = (Element) => (props) => {
+  const renderSwitch = (name) => {
+    switch (name) {
+      case 'name':
+      case 'lastName':
+        return <UserLogo />
+      case 'birthDate':
+        return <DateLogo />
+      case 'birthDate':
+        return <DateLogo />
+      case 'telNumber':
+        return <TelLogo />
+      case 'website':
+        return <SiteLogo />
+      case 'about':
+        return <AboutLogo />
+      case 'stack':
+        return <StackLogo />
+      case 'lastProject':
+        return <LastLogo />
+      default:
+        break
+    }
+  }
   return (
     <div>
-      {props.label === 'Имя' || props.label === 'Фамилия' ? (
-        <UserLogo />
-      ) : props.label === 'Дата рождения' ? (
-        <DateLogo />
-      ) : props.label === 'Телефон' ? (
-        <TelLogo />
-      ) : props.label === 'Сайт' ? (
-        <SiteLogo />
-      ) : props.label === 'О себе' ? (
-        <AboutLogo />
-      ) : props.label === 'Стек технологий' ? (
-        <StackLogo />
-      ) : props.label === 'Описание последнего проекта' ? (
-        <LastLogo />
-      ) : (
-        <div></div>
-      )}
+      {renderSwitch(props.name)}
       <Element {...props} />
     </div>
   )
 }
-
-// export const formValidation = (stateObj) => {
-//   function hasEmptyFields(obj) {
-//     for (let key in obj) {
-//       if (
-//         obj[key] === null ||
-//         obj[key] === undefined ||
-//         obj[key] === '' ||
-//         (Array.isArray(obj[key]) && obj[key].length === 0)
-//       ) {
-//         return true
-//       }
-//     }
-//     return false
-//   }
-
-//   if (hasEmptyFields(stateObj)) {
-//     return false
-//   }
-
-//   return true
-// }
 
 export const normalizeName = (value) => {
   let normalizedName = value.replace(/\d+/g, '')

@@ -2,18 +2,20 @@ import React, { Component } from 'react'
 
 export default class TextArea extends Component {
   render() {
-    const { label, value, onChange, charCount, emptyMessage } = this.props
+    const { type, name, label, value, onChange, charCount, onBlur, error } =
+      this.props
 
     return (
       <label>
         <p>{label}</p>
         <textarea
-          className="textarea"
-          type="text"
-          rows={7}
+          type={type}
+          name={name}
+          placeholder={label}
           value={value}
           onChange={onChange}
-          placeholder={label}
+          onBlur={onBlur}
+          rows={7}
           maxLength={'600'}
         />
         <aside>
@@ -23,7 +25,7 @@ export default class TextArea extends Component {
             ? `Осталось ${600 - charCount}/600 символов`
             : ''}
         </aside>
-        <h6>{emptyMessage}</h6>
+        {error && <h6>{error}</h6>}
       </label>
     )
   }

@@ -1,61 +1,47 @@
 export const data = [
   {
+    name: 'name',
     type: 'text',
     label: 'Имя',
-    stateName: 'name',
-    errorMessage: 'Имя должно начинаться с заглавной буквы',
-    required: true,
-    pattern: '^[A-Z-А-ЯЁ][a-z-а-яё]*(?: [A-Z][a-z]*)*$',
   },
   {
+    name: 'lastName',
     type: 'text',
     label: 'Фамилия',
-    stateName: 'lastName',
-    errorMessage: 'Фамилия должна начинаться с заглавной буквы',
-    required: true,
-    pattern: '^[A-Z-А-ЯЁ][a-z-а-яё]*(?: [A-Z][a-z]*)*$',
   },
   {
+    name: 'birthDate',
     type: 'date',
     label: 'Дата рождения',
-    stateName: 'birthDate',
-    required: true,
   },
   {
+    name: 'telNumber',
     type: 'tel',
     label: 'Телефон',
-    stateName: 'telNumber',
-    errorMessage: 'Номер в формате 7-7777-77-77',
-    required: true,
   },
   {
+    name: 'website',
     type: 'url',
     label: 'Сайт',
-    stateName: 'website',
-    errorMessage: 'всегда должен начинаться с https:// ',
-    required: true,
   },
   {
+    name: 'about',
     type: 'textarea',
     label: 'О себе',
-    stateName: 'about',
-    required: true,
   },
   {
+    name: 'stack',
     type: 'textarea',
     label: 'Стек технологий',
-    stateName: 'stack',
-    required: true,
   },
   {
+    name: 'lastProject',
     type: 'textarea',
     label: 'Описание последнего проекта',
-    stateName: 'lastProject',
-    required: true,
   },
 ]
 
-export const initialState = {
+export const initialFormData = {
   name: '',
   lastName: '',
   birthDate: '',
@@ -64,8 +50,15 @@ export const initialState = {
   about: '',
   stack: '',
   lastProject: '',
-  showModal: false,
-  unFocused: {},
-  charCount: {},
-  errorState: {},
+}
+
+export const initialFormErrors = {
+  name: '',
+  lastName: '',
+  birthDate: '',
+  telNumber: '',
+  website: '',
+  about: '',
+  stack: '',
+  lastProject: '',
 }

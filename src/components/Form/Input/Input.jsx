@@ -2,36 +2,21 @@ import React, { Component } from 'react'
 
 export default class Input extends Component {
   render() {
-    const {
-      type,
-      label,
-      value,
-      onChange,
-      errorMessage,
-      emptyMessage,
-      required,
-      onUnFocused,
-      unFocused,
-      pattern,
-    } = this.props
-
+    const { type, name, label, value, onChange, onBlur, error } = this.props
     return (
       <label>
         <p>{label}</p>
         <input
-          pattern={pattern}
-          required={required}
-          onBlur={onUnFocused}
-          focused={unFocused.toString()}
-          type={type === 'date' ? 'text' : type}
+          type={type}
+          name={name}
+          placeholder={label}
           value={value}
           onChange={onChange}
-          placeholder={label}
-          onFocus={type === 'date' ? (e) => (e.target.type = 'date') : () => ''}
+          onBlur={onBlur}
           maxLength={type === 'tel' ? 12 : null}
+          // onFocus={type === 'date' ? (e) => (e.target.type = 'date') : () => ''}
         />
-        <span>{errorMessage}</span>
-        <h6>{emptyMessage}</h6>
+        {error && <h6>{error}</h6>}
       </label>
     )
   }

@@ -26,6 +26,7 @@ body {
 }
 
 h1 {
+  max-width: 300px;
   font-weight: 800;
   font-size: 37px;
   line-height: 46px;
@@ -61,7 +62,7 @@ span {
   /* opacity: 0.2; */
   font-size: 14px;
   font-weight: 600;
-  display: none;
+  /* display: none; */
 }
 
 aside {
@@ -72,13 +73,13 @@ aside {
   text-align: right;
 }
 
-input:invalid[focused='true'] {
+/* input:invalid[focused='true'] {
   border: 1px solid #ff4a263d;
 }
 
 input:invalid[focused='true'] ~ span {
   display: block;
-}
+} */
 
 button {
   position: relative;
