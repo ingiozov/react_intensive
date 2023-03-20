@@ -1,131 +1,160 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900;1000&display=swap');
 
-body {
-  font-family: 'Montserrat Alternates', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  width: 100vw;
-  display: grid;
-  place-items: center;
-  background: rgb(35, 37, 38);
+:root {
+  --text-color: #d5d9e3;
+  --background: rgb(24, 31, 75);
+  --input-background: #4f5c8847;
+  --input-background-full: #4f5c88;
 }
 
 * {
   margin: 0;
-  padding: 0;
   box-sizing: border-box;
-  scroll-behavior: smooth;
-}
-
-.App {
-  min-width: 100vw;
-  margin: 0 auto;
-  box-shadow: 0px 21px 52px rgba(0, 0, 0, 0.2);
-  padding: 70px 30px 40px;
-  background: #1d1d1d;
 }
 
 h1 {
-  max-width: 300px;
-  font-weight: 800;
-  font-size: 37px;
-  line-height: 46px;
-  letter-spacing: -0.03em;
-  color: #fff;
-  margin-bottom: 45px;
+  font-weight: 900;
+  font-size: 48px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--text-color);
+  margin: 15px 0;
 }
 
 h2 {
-  color: #626262;
-  font-size: 20px;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 0.8;
+  letter-spacing: -0.03em;
 }
 
-h6 {
-  margin-left: 15px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #ff4a265d;
+h4 {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
 }
 
 p {
+  margin-bottom: 3px;
+  margin-left: 7px;
+  opacity: 0.5;
+
   font-size: 14px;
-  font-weight: 700;
-  line-height: 16px;
+  font-weight: 800;
   letter-spacing: -0.05em;
-  margin-bottom: 7px;
-  margin-left: 30px;
-  color: #62626268;
 }
 
 span {
-  color: #ff4a265d;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-aside {
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
-  letter-spacing: -0.05em;
-  text-align: right;
+  color: #fd6bb7;
+  padding: 8px 5px;
 }
 
 button {
-  position: relative;
   width: 100%;
-
-  border: none;
-  outline: none;
   background: none;
-  color: white;
-  text-align: start;
-
-  font-family: 'Montserrat Alternates';
-  font-weight: 700;
-  font-size: 25px;
-  line-height: 110px;
-  letter-spacing: -0.03em;
-
+  border: 1px solid var(--text-color);
+  border-radius: 10px;
+  padding: 15px 12px;
+  color: var(--text-color);
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   cursor: pointer;
 }
 
-button::before {
-  content: '';
-  position: absolute;
-  width: 55px;
-  height: 55px;
-  right: 0px;
-  top: 50%;
-  transform: translateY(-50%);
-  border-radius: 50%;
-  background: radial-gradient(
-    47.35% 47.35% at 50% 50%,
-    #ffab95 0%,
-    #df3908 100%
+body {
+  font-family: 'Nunito', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--text-color);
+}
+
+.app {
+  width: 100vw;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: var(--background);
+  background: linear-gradient(
+    90deg,
+    rgba(24, 31, 75, 1) 20%,
+    rgba(48, 56, 102, 1) 50%,
+    rgba(24, 31, 75, 1) 80%
   );
-  box-shadow: 0px 10px 20px rgba(255, 94, 52, 0.3);
-  transition: all 0.3s ease-in-out;
 }
 
-button::after {
-  content: url('./icons/arrow-right.png');
-  position: absolute;
-  width: 55px;
-  height: 55px;
-  right: 0px;
-  top: 50%;
-  transform: translateY(-64%);
-  transition: all 0.3s ease-in-out;
+form {
+  max-width: 800px;
+  width: 100%;
+  padding: 15px;
+  margin: auto;
+  border-radius: 58px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
-button:hover::before {
-  box-shadow: 0px 5px 11px rgba(255, 94, 52, 0.3);
+form h1 {
+  width: 100%;
+}
+
+label {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+}
+
+label:nth-child(7) {
+  width: 100%;
+}
+
+input,
+textarea {
+  font-family: 'Nunito', sans-serif;
+  background-color: var(--input-background);
+  color: var(--text-color);
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  padding: 15px;
+
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: -0.05em;
+
+  box-shadow: 0px 0px 30px 0px rgba(79, 92, 136, 0.15);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px var(--input-background-full) inset;
+}
+
+textarea {
+  resize: none;
+  grid-column: 1 / -1;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-color);
+}
+
+::-webkit-calendar-picker-indicator {
+  font-size: 10px;
+  display: none;
 }
 
 @media screen and (min-width: 600px) {
-  .App {
-    border-radius: 58px;
-    min-width: 800px;
+  form {
+    min-width: 600px;
+  }
+  label {
+    width: calc(50% - 6px);
   }
 }
