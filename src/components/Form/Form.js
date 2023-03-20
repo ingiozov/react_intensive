@@ -1,36 +1,87 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { data, initialFormData, initialFormErrors } from '../../utils/data'
+import { normalizePhoneNumber, normalizeName } from '../../utils/functions'
 import Input from './Input/Input'
-import TextArea from './TextArea/TextArea'
+import Textarea from './TextArea/TextArea'
 import Button from '../Button/Button'
-import Modal from '../Modal/Modal'
-import {
-  withIcon,
-  normalizePhoneNumber,
-  normalizeName,
-} from '../../utils/functions'
 import styles from './Form.module.css'
 
-const WithBadgeInput = withIcon(Input)
-const WithBadgeTextArea = withIcon(TextArea)
+function Form({ onFormSubmit }) {
+  const [formData, setFormData] = useState(initialFormData)
+  const [formErrors, setFormErrors] = useState(initialFormErrors)
+  const [charCount, setCharCount] = useState({})
+  const navigate = useNavigate()
 
-export default class Form extends Component {
-  constructor(props) {
-    super(props)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleCancel = this.handleCancel.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleBlur = this.handleBlur.bind(this)
-    this.state = {
-      formData: initialFormData,
-      formErrors: initialFormErrors,
-      charCount: {},
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData({
+      ...formData,
+      [name]:
+        name === 'telNumber'
+          ? normalizePhoneNumber(value)
+          : name === 'name' || name === 'lastName'
+          ? normalizeName(value)
+          : value,
+    })
+    setFormErrors({ ...formErrors, [name]: '' })
+    setCharCount({ [name]: value.length })
+  }
+
+  const handleCancel = (e) => {
+    e.preventDefault()
+    setFormData(initialFormData)
+    setFormErrors(initialFormErrors)
+    setCharCount({})
+    console.log('форма очищена')
+  }
+
+  const onBlur = (e) => {
+    const { name, value } = e.target
+    const emptyMessage = 'поле должно быть заполнено'
+    switch (name) {
+      case 'name':
+      case 'lastName':
+        if (value === '') {
+          setFormErrors({ ...formErrors, [name]: emptyMessage })
+        } else if (!/^[A-ZА-ЯЁ][A-Za-zА-ЯЁа-яё'-]*$/.test(value)) {
+          setFormErrors({ ...formErrors, [name]: 'с заглавной буквы' })
+        }
+        break
+      case 'birthDate':
+        if (value.length <= 1) {
+          setFormErrors({ ...formErrors, [name]: emptyMessage })
+        }
+        break
+      case 'telNumber':
+        if (value === '') {
+          setFormErrors({ ...formErrors, [name]: emptyMessage })
+        }
+        break
+      case 'website':
+        if (value === '') {
+          setFormErrors({ ...formErrors, [name]: emptyMessage })
+        } else if (!/^https?:\/\/.+/.test(value)) {
+          setFormErrors({
+            ...formErrors,
+            [name]: 'сайт должен начинаться с https://',
+          })
+        }
+        break
+      case 'about':
+      case 'stack':
+      case 'lastProject':
+        if (value === '') {
+          setFormErrors({ ...formErrors, [name]: emptyMessage })
+        }
+        break
+      default:
+        break
     }
   }
 
-  handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault()
-    const formData = this.state.formData
     const errors = {}
     if (!formData.name) {
       errors.name = 'Поле Имя должно быть заполнено'
@@ -63,161 +114,57 @@ export default class Form extends Component {
       errors.lastProject = 'Поле О проекте должно быть заполнено'
     }
 
-    this.setState({ formErrors: errors })
+    setFormErrors(errors)
 
     if (Object.keys(errors).length === 0) {
       // submit
-      this.props.onFormSubmit(Object.entries(formData))
+      onFormSubmit(Object.entries(formData))
+      navigate('/result')
     }
   }
 
-  handleCancel() {
-    this.setState({
-      formData: initialFormData,
-      formErrors: initialFormErrors,
-      charCount: {},
-    })
-    this.showModal('Форма очищена')
-    console.log('Форма очищена')
-  }
-
-  showModal(text) {
-    this.setState({
-      showModal: text,
-    })
-  }
-
-  handleChange = (e) => {
-    const { name, value } = e.target
-    this.setState({
-      formData: {
-        ...this.state.formData,
-        [name]:
-          name === 'telNumber'
-            ? normalizePhoneNumber(value)
-            : name === 'name' || name === 'lastName'
-            ? normalizeName(value)
-            : value,
-      },
-    })
-    this.setState({
-      formErrors: { ...this.state.formErrors, [name]: '' },
-    })
-    this.setState({
-      charCount: { ...this.state.charCount, [name]: value.length },
-    })
-  }
-
-  handleBlur(e) {
-    const { name, value } = e.target
-    const emptyMessage = 'поле должно быть заполнено'
-
-    switch (name) {
-      case 'name':
-      case 'lastName':
-        if (value === '') {
-          this.setState({
-            formErrors: {
-              ...this.state.formErrors,
-              [name]: emptyMessage,
-            },
-          })
-        } else if (!/^[A-ZА-ЯЁ][A-Za-zА-ЯЁа-яё'-]*$/.test(value)) {
-          this.setState({
-            formErrors: {
-              ...this.state.formErrors,
-              [name]: 'с заглавной буквы',
-            },
-          })
+  return (
+    <form onSubmit={handleSubmit}>
+      <h1>
+        Создание <br /> анкеты
+      </h1>
+      {data.map(({ type, name, label }) => {
+        if (type !== 'textarea') {
+          return (
+            <Input
+              key={name}
+              type={type}
+              name={name}
+              label={label}
+              value={formData[name]}
+              onChange={handleChange}
+              onBlur={onBlur}
+              error={formErrors[name]}
+            />
+          )
         }
-        break
-      case 'birthDate':
-        if (value.length <= 1) {
-          this.setState({
-            formErrors: { ...this.state.formErrors, [name]: emptyMessage },
-          })
-        }
-        break
-      case 'telNumber':
-        if (value === '') {
-          this.setState({
-            formErrors: { ...this.state.formErrors, [name]: emptyMessage },
-          })
-        }
-        break
-      case 'website':
-        if (value === '') {
-          this.setState({
-            formErrors: { ...this.state.formErrors, [name]: emptyMessage },
-          })
-        } else if (!/^https?:\/\/.+/.test(value)) {
-          this.setState({
-            formErrors: {
-              ...this.state.formErrors,
-              [name]: 'сайт должен начинаться с https://',
-            },
-          })
-        }
-        break
-      case 'about':
-      case 'stack':
-      case 'lastProject':
-        if (value === '') {
-          this.setState({
-            formErrors: { ...this.state.formErrors, [name]: emptyMessage },
-          })
-        }
-        break
-
-      default:
-        break
-    }
-  }
-
-  render() {
-    return (
-      <>
-        <h1>Создание анкеты</h1>
-        <form onSubmit={this.handleSubmit} noValidate>
-          {data.map(({ type, name, label }) => {
-            if (type === 'textarea') {
-              return (
-                <WithBadgeTextArea
-                  key={name}
-                  name={name}
-                  label={label}
-                  value={this.state.formData[name]}
-                  onChange={this.handleChange}
-                  onBlur={this.handleBlur}
-                  charCount={this.state.charCount[name]}
-                  error={this.state.formErrors[name]}
-                />
-              )
-            }
-            return (
-              <WithBadgeInput
-                key={name}
-                type={type}
-                name={name}
-                label={label}
-                value={this.state.formData[name]}
-                onChange={this.handleChange}
-                onBlur={this.handleBlur}
-                error={this.state.formErrors[name]}
-              />
-            )
-          })}
-          <div>
-            <Modal show={this.state.showModal} />
-          </div>
-          <div className={styles.cta}>
-            <Button type="submit">Сохранить</Button>
-            <Button type="button" onClick={this.handleCancel}>
-              Отмена
-            </Button>
-          </div>
-        </form>
-      </>
-    )
-  }
+        return (
+          <Textarea
+            key={name}
+            type={type}
+            name={name}
+            label={label}
+            value={formData[name]}
+            onChange={handleChange}
+            onBlur={onBlur}
+            error={formErrors[name]}
+            charCount={charCount[name]}
+          />
+        )
+      })}
+      <div className={styles.buttons}>
+        <Button type="submit">Сохранить</Button>
+        <Button type="button" onClick={handleCancel}>
+          Отмена
+        </Button>
+      </div>
+    </form>
+  )
 }
+
+export default Form

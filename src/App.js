@@ -1,39 +1,29 @@
-import React, { Component } from 'react'
 import Form from './components/Form/Form'
 import styles from './App.module.css'
+import { useState } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Results from './components/Results/Results'
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      onFormSubmit: false,
-      submitData: [],
-    }
+function App() {
+  const [submitedData, setSubmitedData] = useState([])
+
+  const onFormSubmit = (data) => {
+    setSubmitedData(data)
   }
 
-  render() {
-    return (
-      <main className={styles.App}>
-        {this.state.onFormSubmit ? (
-          <Results
-            data={this.state.submitData}
-            onBack={() =>
-              this.setState({
-                onFormSubmit: false,
-              })
-            }
+  return (
+    <main className={styles.app}>
+      <Router>
+        <Routes>
+          <Route
+            path="/result"
+            element={<Results submitedData={submitedData} />}
           />
-        ) : (
-          <Form
-            onFormSubmit={(data) => {
-              this.setState({ onFormSubmit: true, submitData: data })
-            }}
-          />
-        )}
-      </main>
-    )
-  }
+          <Route path="/" element={<Form onFormSubmit={onFormSubmit} />} />
+        </Routes>
+      </Router>
+    </main>
+  )
 }
 
 export default App
