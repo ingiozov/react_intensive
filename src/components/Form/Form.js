@@ -38,28 +38,29 @@ function Form({ onFormSubmit }) {
 
   const onBlur = (e) => {
     const { name, value } = e.target
+    const emptyMessage = 'поле должно быть заполнено'
     switch (name) {
       case 'name':
       case 'lastName':
         if (value === '') {
-          setFormErrors({ ...formErrors, [name]: 'поле должно быть заполнено' })
+          setFormErrors({ ...formErrors, [name]: emptyMessage })
         } else if (!/^[A-ZА-ЯЁ][A-Za-zА-ЯЁа-яё'-]*$/.test(value)) {
           setFormErrors({ ...formErrors, [name]: 'с заглавной буквы' })
         }
         break
       case 'birthDate':
         if (value.length <= 1) {
-          setFormErrors({ ...formErrors, [name]: 'поле должно быть заполнено' })
+          setFormErrors({ ...formErrors, [name]: emptyMessage })
         }
         break
       case 'telNumber':
         if (value === '') {
-          setFormErrors({ ...formErrors, [name]: 'поле должно быть заполнено' })
+          setFormErrors({ ...formErrors, [name]: emptyMessage })
         }
         break
       case 'website':
         if (value === '') {
-          setFormErrors({ ...formErrors, [name]: 'поле должно быть заполнено' })
+          setFormErrors({ ...formErrors, [name]: emptyMessage })
         } else if (!/^https?:\/\/.+/.test(value)) {
           setFormErrors({
             ...formErrors,
@@ -71,7 +72,7 @@ function Form({ onFormSubmit }) {
       case 'stack':
       case 'lastProject':
         if (value === '') {
-          setFormErrors({ ...formErrors, [name]: 'поле должно быть заполнено' })
+          setFormErrors({ ...formErrors, [name]: emptyMessage })
         }
         break
       default:
