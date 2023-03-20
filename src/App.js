@@ -27,7 +27,6 @@ class App extends Component {
         ) : (
           <Form
             onFormSubmit={(data) => {
-              // console.log(data)
               this.setState({ onFormSubmit: true, submitData: data })
             }}
           />
