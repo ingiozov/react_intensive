@@ -26,12 +26,25 @@ body {
 }
 
 h1 {
+  max-width: 300px;
   font-weight: 800;
   font-size: 37px;
   line-height: 46px;
   letter-spacing: -0.03em;
   color: #fff;
   margin-bottom: 45px;
+}
+
+h2 {
+  color: #626262;
+  font-size: 20px;
+}
+
+h6 {
+  margin-left: 15px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ff4a265d;
 }
 
 p {
@@ -41,7 +54,21 @@ p {
   letter-spacing: -0.05em;
   margin-bottom: 7px;
   margin-left: 30px;
-  color: #626262;
+  color: #62626268;
+}
+
+span {
+  color: #ff4a265d;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+aside {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: -0.05em;
+  text-align: right;
 }
 
 button {

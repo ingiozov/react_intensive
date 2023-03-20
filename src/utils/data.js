@@ -1,47 +1,47 @@
 export const data = [
   {
+    name: 'name',
     type: 'text',
     label: 'Имя',
-    stateName: 'name',
   },
   {
+    name: 'lastName',
     type: 'text',
     label: 'Фамилия',
-    stateName: 'lastName',
   },
   {
+    name: 'birthDate',
     type: 'date',
     label: 'Дата рождения',
-    stateName: 'birthDate',
   },
   {
+    name: 'telNumber',
     type: 'tel',
     label: 'Телефон',
-    stateName: 'telNumber',
   },
   {
+    name: 'website',
     type: 'url',
     label: 'Сайт',
-    stateName: 'website',
   },
   {
+    name: 'about',
     type: 'textarea',
     label: 'О себе',
-    stateName: 'about',
   },
   {
+    name: 'stack',
     type: 'textarea',
     label: 'Стек технологий',
-    stateName: 'stack',
   },
   {
+    name: 'lastProject',
     type: 'textarea',
     label: 'Описание последнего проекта',
-    stateName: 'lastProject',
   },
 ]
 
-export const initialState = {
+export const initialFormData = {
   name: '',
   lastName: '',
   birthDate: '',
@@ -50,5 +50,15 @@ export const initialState = {
   about: '',
   stack: '',
   lastProject: '',
-  showModal: false,
+}
+
+export const initialFormErrors = {
+  name: '',
+  lastName: '',
+  birthDate: '',
+  telNumber: '',
+  website: '',
+  about: '',
+  stack: '',
+  lastProject: '',
 }
